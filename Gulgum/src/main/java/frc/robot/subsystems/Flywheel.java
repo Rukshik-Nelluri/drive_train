@@ -15,18 +15,20 @@ public class Flywheel extends SubsystemBase {
     private static Flywheel flywheel;
 
     public Flywheel() {
-        topFlywheelMotor = new CANSparkMax(11, MotorType.kBrushless);
+        // topFlywheelMotor = new CANSparkMax(11, MotorType.kBrushless);
         bottomFlywheelMotor = new CANSparkMax(12, MotorType.kBrushless);
+        bottomFlywheelMotor.restoreFactoryDefaults();
+        
         shooterLock = new Solenoid(21, PneumaticsModuleType.REVPH, 6);
-        topFlywheelMotor.setIdleMode(IdleMode.kCoast);
+        // topFlywheelMotor.setIdleMode(IdleMode.kCoast);
         bottomFlywheelMotor.setIdleMode(IdleMode.kCoast);
 
-        topFlywheelMotor.setSmartCurrentLimit(40);
+        // topFlywheelMotor.setSmartCurrentLimit(40);
         bottomFlywheelMotor.setSmartCurrentLimit(40);
-        topFlywheelMotor.setInverted(true); 
+        // topFlywheelMotor.setInverted(true); 
         // bottomFlywheelMotor.follow(topFlywheelMotor);
 
-        SmartDashboard.putNumber("flywheel motor speed", 0);
+        SmartDashboard.putNumber("flywheel motor speed", 0.0);
         SmartDashboard.putBoolean("flywheel solenoid", false);
     }
 
@@ -38,7 +40,7 @@ public class Flywheel extends SubsystemBase {
     }
 
     public void setMotor(double speed) {
-        topFlywheelMotor.set(speed);
+        // topFlywheelMotor.set(speed);
         bottomFlywheelMotor.set(speed); 
     }
 
@@ -48,7 +50,7 @@ public class Flywheel extends SubsystemBase {
 
     @Override
     public void periodic() {
-        setMotor(SmartDashboard.getNumber("flywheel motor speed", 0));
-        setSolenoid(SmartDashboard.getBoolean("flywheel solenoid", false));
+        // setMotor(SmartDashboard.getNumber("flywheel motor speed", 0.0));
+        // setSolenoid(SmartDashboard.getBoolean("flywheel solenoid", false));
     }
 }

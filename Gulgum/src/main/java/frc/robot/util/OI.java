@@ -34,7 +34,7 @@ public class OI {
         touchpadButton.onTrue(new StopFlywheel());
 
         Trigger r1Button = new JoystickButton(controller, PS4Controller.Button.kR1.value);
-        r1Button.onTrue(new StartFlywheel());
+        r1Button.whileTrue(new StartFlywheel());
     }
 
     public static OI getInstance() {
