@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.util.OI;
+import frc.robot.utils.OI;
 
 public class Drivetrain extends SubsystemBase {
   private CANSparkMax leftMotorMaster, leftMotorFollower1, leftMotorFollower2;

@@ -7,7 +7,7 @@ package frc.robot.commands;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
-import frc.robot.util.OI;
+import frc.robot.utils.OI;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class StopIntake extends Command {

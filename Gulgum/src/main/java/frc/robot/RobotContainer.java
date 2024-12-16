@@ -13,7 +13,7 @@ import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Flywheel;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
-import frc.robot.util.OI;
+import frc.robot.utils.OI;
 
 import java.sql.Driver;
 

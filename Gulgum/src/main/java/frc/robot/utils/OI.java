@@ -1,40 +1,33 @@
-package frc.robot.util;
+package frc.robot.utils;
 
 import edu.wpi.first.wpilibj.PS4Controller;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.commands.StartIntake;
-import frc.robot.commands.StopFlywheel;
-import frc.robot.commands.StopIntake;
-import frc.robot.commands.OpenFlywheelGate;
-import frc.robot.commands.ReverseIntake;
-import frc.robot.commands.StartFlywheel;
+import frc.robot.subsystems.Superstructure;
+import frc.robot.subsystems.Superstructure.SuperstructureState;
 
 
 public class OI {
     private PS4Controller controller;
     private static OI instance;
+    private Superstructure superstructure;
 
     public OI() {
         controller = new PS4Controller(0);
+        superstructure = new Superstructure();
 
         Trigger xButton = new JoystickButton(controller, PS4Controller.Button.kCross.value);
-        xButton.onTrue(new StartIntake());
+        xButton.onTrue(new InstantCommand(() -> superstructure.requestState(SuperstructureState.STOW)));
         
         Trigger triangleButton = new JoystickButton(controller, PS4Controller.Button.kTriangle.value);
-        triangleButton.onTrue(new StopIntake());
+        triangleButton.whileTrue(new InstantCommand(() -> superstructure.requestState(SuperstructureState.INTAKE)));
 
         Trigger squareButton = new JoystickButton(controller, PS4Controller.Button.kSquare.value);
-        squareButton.onTrue(new ReverseIntake());
+        squareButton.onTrue(new InstantCommand(() -> superstructure.requestState(SuperstructureState.SHOOT)));
 
         Trigger circleButton = new JoystickButton(controller, PS4Controller.Button.kCircle.value);
-        circleButton.onTrue(new OpenFlywheelGate());
-
-        Trigger touchpadButton = new JoystickButton(controller, PS4Controller.Button.kTouchpad.value);
-        touchpadButton.onTrue(new StopFlywheel());
-
-        Trigger r1Button = new JoystickButton(controller, PS4Controller.Button.kR1.value);
-        r1Button.whileTrue(new StartFlywheel());
+        circleButton.onTrue(new InstantCommand(() -> superstructure.requestState(SuperstructureState.STOP_SHOOT)));
     }
 
     public static OI getInstance() {
