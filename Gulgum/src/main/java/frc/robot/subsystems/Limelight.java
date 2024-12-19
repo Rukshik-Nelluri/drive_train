@@ -1,6 +1,8 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.util.function.BooleanConsumer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.LimelightHelper;
 import frc.robot.utils.RollingAverage;
@@ -9,11 +11,13 @@ public class Limelight extends SubsystemBase {
     private static Limelight limelight;
     private String limelightName;
     private RollingAverage TxRollingAverage, TyRollingAverage;
+    private PIDController pidController;
 
     public Limelight() {
         limelightName = "limelight";
         TxRollingAverage = new RollingAverage(5);
         TyRollingAverage = new RollingAverage(5);
+        pidController = new PIDController(0.01, 0, 0);
     }
 
     public double getTx() {
@@ -26,6 +30,10 @@ public class Limelight extends SubsystemBase {
 
     public Boolean getTv(){
         return LimelightHelper.getTV(limelightName); 
+    }
+
+    public PIDController getPIDController() {
+        return pidController;
     }
 
     public void updateRollingAverage() {
@@ -56,5 +64,8 @@ public class Limelight extends SubsystemBase {
     @Override
     public void periodic() {
         updateRollingAverage(); 
+        SmartDashboard.putBoolean("HAS TARGET", hasTarget());
+        SmartDashboard.putNumber("TX", getRollingTx()); 
     }
 }
+

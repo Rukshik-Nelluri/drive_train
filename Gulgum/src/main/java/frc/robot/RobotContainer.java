@@ -7,7 +7,7 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.Drive;
-import frc.robot.commands.ExampleCommand;
+// import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Flywheel;
@@ -36,12 +36,13 @@ public class RobotContainer {
   private Flywheel flywheel;
 
   public RobotContainer() {
-    oi = OI.getInstance();
+   
     drivetrain = Drivetrain.getInstance();
     drivetrain.setDefaultCommand(new Drive());
     intake = Intake.getInstance();
     hopper = Hopper.getInstance();
     flywheel = Flywheel.getInstance();
+    oi = OI.getInstance();
   }
 
   public Command getAutonomousCommand() {

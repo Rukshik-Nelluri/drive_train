@@ -29,17 +29,26 @@ public class Drivetrain extends SubsystemBase {
     rightMotorMaster = new CANSparkMax(1, MotorType.kBrushless);
     rightMotorFollower1 = new CANSparkMax(2, MotorType.kBrushless);
     rightMotorFollower2 = new CANSparkMax(3, MotorType.kBrushless);
+    
+    leftMotorMaster.restoreFactoryDefaults();
+    leftMotorFollower1.restoreFactoryDefaults();
+    leftMotorFollower2.restoreFactoryDefaults();
+    rightMotorMaster.restoreFactoryDefaults();
+    rightMotorFollower1.restoreFactoryDefaults();
+    rightMotorFollower2.restoreFactoryDefaults();
 
     leftMotorFollower1.follow(leftMotorMaster);
     leftMotorFollower2.follow(leftMotorMaster);
     rightMotorFollower1.follow(rightMotorMaster);
     rightMotorFollower2.follow(rightMotorMaster);
 
+    rightMotorMaster.setInverted(true);
+
     drive = new DifferentialDrive(leftMotorMaster, rightMotorMaster);
   }
 
   public void arcadeDrive(double speed, double rotation) {
-    drive.arcadeDrive(speed, rotation);
+    drive.arcadeDrive(speed, rotation, true);
   }
 
   public static Drivetrain getInstance() {
